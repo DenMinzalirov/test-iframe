@@ -159,8 +159,8 @@ export default function RegistrationModal({ onClose, domainData, isLoading, erro
         localStorage.setItem('was-registered', 'true')
         
         // Перенаправляем на сайт казино в новом окне
-        window.open(linkToNavigate, '_blank', 'noopener,noreferrer')
-        // window.location.href = linkToNavigate
+        // window.open(linkToNavigate, '_blank', 'noopener,noreferrer')
+        window.location.href = linkToNavigate
       } else {
         alert(texts.registrationSuccess)
         onClose()
@@ -176,8 +176,8 @@ export default function RegistrationModal({ onClose, domainData, isLoading, erro
         })
         
         if (errorLink) {
-          window.open(errorLink, '_blank', 'noopener,noreferrer')
-          // window.location.href = errorLink
+          // window.open(errorLink, '_blank', 'noopener,noreferrer')
+          window.location.href = errorLink
           return
         }
       }
