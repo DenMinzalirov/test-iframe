@@ -32,6 +32,7 @@ const getUITexts = (lang: 'ru' | 'en') => {
   const texts = {
     ru: {
       registration: 'Регистрация',
+      login: 'Вход',
       emailPlaceholder: 'Введите ваш email',
       passwordPlaceholder: 'Введите пароль',
       newsUpdates: 'Я хочу получать информацию о новостях и предложениях от казино и выбранных партнеров',
@@ -40,6 +41,7 @@ const getUITexts = (lang: 'ru' | 'en') => {
       privacyLink: 'Политику конфиденциальности',
       and: 'и',
       registerButton: 'Регистрация',
+      loginButton: 'Войти',
       loading: 'Загрузка...',
       waiting: 'Ожидание данных...',
       orRegister: 'Или зарегистрируйтесь через',
@@ -55,6 +57,7 @@ const getUITexts = (lang: 'ru' | 'en') => {
     },
     en: {
       registration: 'Registration',
+      login: 'Login',
       emailPlaceholder: 'Enter your email',
       passwordPlaceholder: 'Enter password',
       newsUpdates: 'I want to receive information about news and offers from the casino and selected partners',
@@ -63,6 +66,7 @@ const getUITexts = (lang: 'ru' | 'en') => {
       privacyLink: 'Privacy Policy',
       and: 'and',
       registerButton: 'Register',
+      loginButton: 'Sign in',
       loading: 'Loading...',
       waiting: 'Waiting for data...',
       orRegister: 'Or register via',
@@ -257,38 +261,81 @@ export default function RegistrationModal({ onClose, domainData, isLoading, erro
           >
             {texts.registration}
           </button>
+          <button
+            onClick={() => setActiveTab('login')}
+            style={{
+              flex: 1,
+              padding: '8px 0',
+              textAlign: 'center',
+              fontWeight: '500',
+              background: 'none',
+              border: 'none',
+              color: activeTab === 'login' ? '#f97316' : '#9ca3af',
+              borderBottom: activeTab === 'login' ? '2px solid #f97316' : '2px solid transparent',
+              cursor: 'pointer',
+              transition: 'all 0.2s'
+            }}
+            onMouseOver={(e) => {
+              if (activeTab !== 'login') e.currentTarget.style.color = '#ffffff'
+            }}
+            onMouseOut={(e) => {
+              if (activeTab !== 'login') e.currentTarget.style.color = '#9ca3af'
+            }}
+          >
+            {texts.login}
+          </button>
         </div>
 
-        {/* Приветственное предложение */}
-        {/* <div style={{
-          background: 'linear-gradient(135deg, #6b46c1 0%, #9333ea 100%)',
-          borderRadius: '8px',
+        {/* Бонус-плашка */}
+        <div style={{
+          position: 'relative',
+          background: 'linear-gradient(135deg, #f59e0b 0%, #ef4444 50%, #8b5cf6 100%)',
+          borderRadius: '12px',
           padding: '16px',
           marginBottom: '24px',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '12px'
+          overflow: 'hidden',
+          boxShadow: '0 10px 30px rgba(139, 92, 246, 0.35), inset 0 0 0 1px rgba(255,255,255,0.09)'
         }}>
           <div style={{
-            width: '32px',
-            height: '32px',
-            backgroundColor: 'rgba(255, 255, 255, 0.2)',
-            borderRadius: '50%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}>
-            <span style={{ color: 'white', fontSize: '16px' }}>🎁</span>
+            position: 'absolute',
+            top: '-40px',
+            right: '-40px',
+            width: '160px',
+            height: '160px',
+            background: 'radial-gradient(circle at center, rgba(255,255,255,0.25), transparent 60%)',
+            filter: 'blur(10px)'
+          }} />
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div style={{
+              width: '40px',
+              height: '40px',
+              backgroundColor: 'rgba(255, 255, 255, 0.2)',
+              borderRadius: '8px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.25)'
+            }}>
+              <span style={{ fontSize: '20px' }}>🎁</span>
+            </div>
+            <div style={{ flex: 1 }}>
+              <p style={{ margin: 0, color: 'white', fontWeight: 700, letterSpacing: '0.3px' }}>Hertzbet</p>
+              <p style={{ margin: '2px 0 0 0', color: 'rgba(255,255,255,0.95)', fontSize: '13px' }}>200% bis zu 1000 EUR + 150 FS</p>
+            </div>
+            <div>
+              <span style={{
+                display: 'inline-block',
+                backgroundColor: 'rgba(17,24,39,0.35)',
+                color: 'white',
+                fontWeight: 700,
+                fontSize: '11px',
+                padding: '6px 10px',
+                borderRadius: '9999px',
+                border: '1px solid rgba(255,255,255,0.25)'
+              }}>BONUS</span>
+            </div>
           </div>
-          <div>
-            <p style={{ color: 'white', fontWeight: '600', margin: '0 0 4px 0', fontSize: '14px' }}>
-              Приветственный пакет
-            </p>
-            <p style={{ color: 'rgba(255, 255, 255, 0.9)', margin: 0, fontSize: '12px' }}>
-              до €1,500 + 250 бесплатных спинов
-            </p>
-          </div>
-        </div> */}
+        </div>
 
         {/* Состояния загрузки и ошибок */}
         {/* {isLoading && (
@@ -573,7 +620,13 @@ export default function RegistrationModal({ onClose, domainData, isLoading, erro
             ) : (
               <>
                 <span>
-                  {isLoading ? texts.loading : !domainData ? texts.waiting : texts.registerButton}
+                  {isLoading
+                    ? texts.loading
+                    : !domainData
+                      ? texts.waiting
+                      : activeTab === 'signup'
+                        ? texts.registerButton
+                        : texts.loginButton}
                 </span>
                 {/* {!isLoading && domainData && (
                   <div style={{
