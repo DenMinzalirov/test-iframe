@@ -201,8 +201,8 @@ export default function RegistrationModal({ onClose, domainData, isLoading, erro
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: 'rgba(0, 0, 0, 0.7)',
-      backdropFilter: 'blur(4px)'
+      // backgroundColor: 'rgba(0, 0, 0, 0.7)',
+      // backdropFilter: 'blur(1px)'
     }}>
       <div style={{
         position: 'relative',

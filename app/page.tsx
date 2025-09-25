@@ -1,15 +1,17 @@
 'use client'
 
 import RegistrationModal from '@/components/RegistrationModal'
+import SpinToWin from '@/components/SpinToWin'
 import { useState, useEffect } from 'react'
 import { initAppAndGetActiveDomain, type ActiveDomainData } from 'apuesta-cloud-landing-utils'
 
 export default function Home() {
-  const [isModalOpen, setIsModalOpen] = useState(true)
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const [domainData, setDomainData] = useState<ActiveDomainData | null>(null)
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [showIframe, setShowIframe] = useState(false)
+  
 
   useEffect(() => {
     // Инициализация домена при загрузке
@@ -59,6 +61,7 @@ export default function Home() {
       margin: 0,
       padding: 0
     }}>
+      
       {/* Фоновое изображение */}
       <div
         style={{
@@ -95,6 +98,11 @@ export default function Home() {
           allow="fullscreen"
           sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox"
         />
+
+      {/* Интерактив: Spin to Win по центру экрана */}
+      <div style={{ position: 'absolute', inset: 0, zIndex: 3, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <SpinToWin onOpenRegistration={() => setIsModalOpen(true)} />
+      </div>
       
       {/* Модальное окно регистрации */}
       {isModalOpen && (
