@@ -320,7 +320,7 @@ export default function RegistrationModal({ onClose, domainData, isLoading, erro
             </div>
             <div style={{ flex: 1 }}>
               <p style={{ margin: 0, color: 'white', fontWeight: 700, letterSpacing: '0.3px' }}>Hertzbet</p>
-              <p style={{ margin: '2px 0 0 0', color: 'rgba(255,255,255,0.95)', fontSize: '13px' }}>200% bis zu 1000 EUR + 150 FS</p>
+              <p style={{ margin: '2px 0 0 0', color: 'rgba(255,255,255,0.95)', fontSize: '13px' }}>200% up to 1000 EUR + 150 FS</p>
             </div>
             <div>
               <span style={{
