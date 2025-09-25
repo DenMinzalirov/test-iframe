@@ -146,7 +146,7 @@ export default function RegistrationModal({ onClose, domainData, isLoading, erro
         language: (data.language as 'tr' | 'de' | 'en') ?? getApuestaLanguage(),
         promoCode: data.promoCode || undefined,
         loginType: LoginType.Email,
-        region: '', // пустая строка для значения по умолчанию
+        region: 'de', // пустая строка для значения по умолчанию
       }
 
       // Регистрируем игрока через API
